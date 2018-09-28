@@ -1,0 +1,57 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <img width="300" alt="Angular Logo" src="../assets/harry_potter.jpg"
+  (click)="trigger($event)" (contextmenu)="rightClick($event)" usemap="#planetmap">
+  <map name="planetmap" id="auto">
+    <area *ngFor="let element of elements" 
+    shape="{{element.shape}}" coords="{{element.coords}}" 
+    (click)="selectedElementTrigger(element.type)" 
+    title="{{element.type}}" />
+  </map>
+</div>
+<div *ngIf='onload'>
+  <h2>Read Me: </h2>
+  <ul>
+    <li>
+      <h2>Left click to view selected section</h2>
+      <h2>By Default top left cornor of image have image map</h2>
+    </li>
+    <li>
+      <h2>Right click to add selected section</h2>
+    </li>
+    <li>
+      <h2>On Refresh Data will be lost</h2>
+    </li>      
+  </ul>
+</div>
+<div *ngIf='left'>  
+  <h2>You have selected <b>{{selectedElement|uppercase}}</b></h2>   
+</div>
+<div *ngIf='right'>
+  <h2>Add Element</h2>
+  {{message}}
+  <div>
+    Name: 
+    <input type="text" id="type" [(ngModel)]="model.type" 
+      name="type" #type="ngModel" />
+  </div>
+  <div>
+    Coords: <input type="text" id="coords" [(ngModel)]="model.coords" 
+      name="coords" #coords="ngModel" />
+  </div>
+  <div>
+    Shape: 
+    <select name="shape" id="shape" (change)="update($event.target.value)">
+      <option *ngFor="let item of items">{{item}}</option>
+    </select>
+  </div>
+  <div>
+    <input type="button" (click)="addElement()" value="Add">
+  </div>
+</div>
+<div *ngIf='isAdded'><h2>{{model.type|uppercase}} is added.</h2></div>
+
+
